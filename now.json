@@ -8,7 +8,7 @@
             "handle": "filesystem"
         },
         {
-            "src": "/.*",
+            "src": "/routes/*.*",
             "dest": "index.js"
         }
     ]

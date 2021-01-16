@@ -9,7 +9,7 @@ const port = process.env.PORT
 const session = require('express-session');
 require('./config/passport')(passport)
 
-app.use(require('serve-static')('./api/public'));
+app.use(require('serve-static')('./public'));
 app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({
     extended: true
@@ -26,7 +26,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.set('views', './api/views');
+app.set('views', './views');
 app.set('view engine', 'ejs');
 
 if (process.env.ENV == "p" || process.env.ENV == "production") {

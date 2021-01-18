@@ -56,4 +56,27 @@ router.get('/logout', (req, res) => {
     res.redirect('/');
 });
 
+/**
+ * Other user stuff like /u/:username and settings page
+ * 
+ * These will be all the main GET function of the inte-
+ * -ractive GET user pages
+ */
+// GET, user settings page
+router.get('/settings', async function (req, res, next) {
+    if (!req.user) {
+        return res.redirect('/login?next=/settings')
+    }
+
+    const user = req.user
+
+    about.title = '/u/' + user.username + ' Settings - ' + Name
+    about.template = 'user/settings'
+    about.user = user
+    about.navbar = true
+    about.footer = true
+
+    return res.render('base', about);
+})
+
 module.exports = router;

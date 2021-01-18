@@ -1,0 +1,109 @@
+<div>
+    <div
+        class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50">
+        <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+
+        <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+
+            <div
+                class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+                <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                    viewbox="0 0 18 18">
+                    <path
+                        d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+                    </path>
+                </svg>
+                <span class="text-sm">(Esc)</span>
+            </div>
+
+            <!-- Add margin if you want to see some of the overlay behind the modal-->
+            <div class="modal-content py-4 text-left px-6 bg-gray-900 border-black border-2">
+                <!--Title-->
+                <div class="flex justify-between items-center pb-3">
+                    <p class="text-2xl font-bold text-gray-100">New Log
+                        <a href="https://www.markdownguide.org/basic-syntax" target="_blank" class="max-w-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"
+                                class="fill-current text-gray-600 tooltip" data-title="Some Markdown supported."
+                                data-placement="right">
+                                <path fill-rule="evenodd" d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52
+                                    1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7
+                                    5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z">
+                                </path>
+                            </svg>
+                        </a>
+                    </p>
+                    <div class="modal-close cursor-pointer z-50">
+                        <svg class="fill-current text-gray-100" xmlns="http://www.w3.org/2000/svg" width="18"
+                            height="18" viewbox="0 0 18 18">
+                            <path
+                                d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+
+                <!--Body-->
+                <form class="mt-0" x-data="{content: ''}" action="/post" method="POST">
+                    <div class="mx-auto max-w-lg ">
+                        <div class="py-1">
+                            <span class="px-1 text-sm text-gray-600">New Log Text
+                            </span>
+                            <textarea minlength="1" required="required"
+                                placeholder="Uncaught ReferenceError: Log is not defined" name="log" id="log"
+                                type="text" x-model="content" rows="8"
+                                class="text-md block px-3 py-2 rounded-lg w-full
+                bg-gray-800 border-2 border-gray-800 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:outline-none focus:text-gray-100"></textarea>
+                        </div>
+                        <div class="flex justify-start mt-3 ml-4 p-1">
+                            <ul>
+                                <li class="flex items-center py-1">
+                                    <div :class="{'bg-green-200 text-green-800': content.length < 651, 'bg-red-200 text-red-700': content.length > 650}"
+                                        class=" rounded-full p-1 fill-current ">
+                                        <svg class="w-4 h-4" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+                                            <path x-show="content.length < 651" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                            <path x-show="content.length > 650" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+
+                                        </svg>
+                                    </div>
+                                    <span
+                                        :class="{'text-green-300':content.length < 651, 'text-red-400':content.length > 650}"
+                                        class="font-medium text-sm ml-3"
+                                        x-text="content.length < 651 ? 'Log is less than 650 characters' : 'Log is more than 650 characters'"></span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!--Footer-->
+                        <div class="flex justify-end pt-2">
+                            <a class="modal-close px-4 bg-red-400 p-3 rounded-lg text-black hover:bg-red-500
+                                hover:text-gray-900 mr-2 cursor-pointer">Cancel</a>
+                            <button disabled="disabled" x-show="content.length > 650 || content.length == 0"
+                                class="px-4 p-3 rounded-lg text-gray-100 bg-gray-300 cursor-default">Console
+                                Log</button>
+                            <button type="submit" x-show="content.length < 651 && content.length != 0" class="px-4 bg-indigo-500 p-3 rounded-lg text-white
+                    hover:bg-indigo-400">Console Log</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- cookie thingy -->
+<div class="fixed bottom-4 m-8 bg-white border-t-4 z-50 mb-6 p-6 bg-red-100 hidden">
+    <h2 class="text-lg lg:text-xl mb-4 block font-bold leading-tight text-gray-600">Cookie Policy</h2>
+    <div class="lg:flex lg:space-x-5">
+        <p class="mb-5 font-medium text-gray-600">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus maximus condimentum libero. Nulla tempus
+            metus sit amet
+            sagittis tempus. Donec maximus odio nibh, ut congue ante dictum suscipit.
+        </p>
+        <button
+            class="w-full lg:w-48 px-3 py-1 bg-gray-300 hover:bg-gray-200 hover:underline rounded text-gray-700 mr-2 mb-5 uppercase tracking-widest text-xs font-bold">
+            I agree
+        </button>
+    </div>
+</div>

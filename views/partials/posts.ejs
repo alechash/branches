@@ -1,0 +1,145 @@
+<script src="/js/postsHelper.js"></script>
+<script>
+    var userid = '<%= userid %>'
+</script>
+<div class="flex items-center text-gray-800">
+    <div class="p-6 w-full">
+        <div class="grid grid-cols-12 gap-4">
+
+            <div class="col-span-12 col-span-4 sm:col-span-4 md:col-span-3" id="left_bar">
+
+                <div class="flex flex-row bg-indigo-600 shadow-sm rounded p-4 mb-0">
+                    <div
+                        class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
+                            class="text-color-500 fill-current" height="24">
+                            <path
+                                d="M2.5 2.75a.75.75 0 00-1.5 0v18.5c0 .414.336.75.75.75H20a.75.75 0 000-1.5H2.5V2.75z">
+                            </path>
+                            <path
+                                d="M22.28 7.78a.75.75 0 00-1.06-1.06l-5.72 5.72-3.72-3.72a.75.75 0 00-1.06 0l-6 6a.75.75 0 101.06 1.06l5.47-5.47 3.72 3.72a.75.75 0 001.06 0l6.25-6.25z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="flex flex-col flex-grow ml-4">
+                        <div class="text-2xl text-gray-200 my-auto xs:hidden">Trending
+                        </div>
+                        <div class="text-2xl text-gray-200 my-auto xs:visible">
+                            Trending Posts<i
+                                class="lni lni-chevron-right xs:visible my-auto ml-auto mr-0 float-right mt-1 pt-0.5"
+                                onclick="expandSmallTrending()" id="trendingExpand"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <span id="trendingContainer" class="m-0 p-0 xs:hidden duration-700">
+                </span>
+
+                <div class="flex flex-row bg-red-600 shadow-sm rounded p-4 mb-0 mt-6">
+                    <div
+                        class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-red-100 text-red-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
+                            class="text-color-500 fill-current" height="24">
+                            <path
+                                d="M12.5 7.25a.75.75 0 00-1.5 0v5.5c0 .27.144.518.378.651l3.5 2a.75.75 0 00.744-1.302L12.5 12.315V7.25z">
+                            </path>
+                            <path fill-rule="evenodd"
+                                d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zM2.5 12a9.5 9.5 0 1119 0 9.5 9.5 0 01-19 0z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="flex flex-col flex-grow ml-4">
+                        <div class="text-2xl text-gray-200 my-auto xs:hidden">Latest</div>
+                        <div class="text-2xl text-gray-200 my-auto xs:visible">Latest Posts<i
+                                class="lni lni-chevron-right xs:visible my-auto ml-auto mr-0 float-right mt-1 pt-0.5"
+                                onclick="expandSmallLatest()" id="latestExpand"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <span id="latestContainer" class="m-0 p-0 xs:hidden">
+                </span>
+
+            </div>
+
+            <div class="col-span-12 sm:col-span-8 md:col-span-9" id="postsContainer">
+                <% for(var i=0; i < posts.length; i++) {%>
+                <div class="flex flex-row bg-white shadow-sm rounded p-4 bg-gray-900 mb-3">
+                    <div class="max-w-15 min-h-44 max-h-96 overflow-scroll no-scrollbar">
+                        <img class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-black mb-2"
+                            src="https://avatars4.githubusercontent.com/u/55750096?v4" id="profile_picture"
+                            title="Profile Picture">
+                        <% if(posts[i].likes.includes(userid)) { %>
+
+                        <span title="Like Post" onclick="removelike('<%= posts[i]._id %>')"
+                            class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-red-100 text-red-500 mb-2 bg-red-500"
+                            id="like_button_<%= posts[i]._id %>">
+                            <svg xmlns=" http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+                                <path fill-rule="evenodd" class="text-red-500 text-red-900 fill-current"
+                                    id="like_svg_path_<%= posts[i]._id %>"
+                                    d="M4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.565 20.565 0 008 13.393a20.561 20.561 0 003.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.75.75 0 01-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5zM8 14.25l-.345.666-.002-.001-.006-.003-.018-.01a7.643 7.643 0 01-.31-.17 22.075 22.075 0 01-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.08 22.08 0 01-3.744 2.584l-.018.01-.006.003h-.002L8 14.25zm0 0l.345.666a.752.752 0 01-.69 0L8 14.25z">
+                                </path>
+                            </svg>
+                        </span>
+
+                        <% } else { %>
+
+                        <span title="Like Post" onclick="like('<%= posts[i]._id %>')"
+                            class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-red-100 text-red-500 mb-2"
+                            id="like_button_<%= posts[i]._id %>">
+                            <svg xmlns=" http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+                                <path fill-rule="evenodd" class="text-red-500 fill-current"
+                                    id="like_svg_path_<%= posts[i]._id %>"
+                                    d="M4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.565 20.565 0 008 13.393a20.561 20.561 0 003.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.75.75 0 01-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5zM8 14.25l-.345.666-.002-.001-.006-.003-.018-.01a7.643 7.643 0 01-.31-.17 22.075 22.075 0 01-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.08 22.08 0 01-3.744 2.584l-.018.01-.006.003h-.002L8 14.25zm0 0l.345.666a.752.752 0 01-.69 0L8 14.25z">
+                                </path>
+                            </svg>
+                        </span>
+
+                        <% } %>
+
+                        <span title="Bookmark Post" class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100
+                            text-blue-500 mb-2" id="bookmark_button">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+                                <path fill-rule="evenodd" class="text-blue-500 fill-current" fill="blue"
+                                    d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25zm0 2.445L6.615 5.5a.75.75 0 01-.564.41l-3.097.45 2.24 2.184a.75.75 0 01.216.664l-.528 3.084 2.769-1.456a.75.75 0 01.698 0l2.77 1.456-.53-3.084a.75.75 0 01.216-.664l2.24-2.183-3.096-.45a.75.75 0 01-.564-.41L8 2.694v.001z">
+                                </path>
+                            </svg>
+                        </span>
+                        <span title="Report Post" class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-yellow-100
+                            text-yellow-500 mb-2" id="like_button"><i class="lni lni-flag"></i></span>
+                    </div>
+                    <div class="flex flex-col flex-grow ml-4">
+                        <div class="text-sm text-gray-500"><a href="/u/mr-winson"
+                                class="text-gray-400 hover:text-gray-600"><span class="font-bold"
+                                    id="at_symbol">@</span><span class="font-bold" id="username">mr-winson</span></a>
+                            <span id="time"> • <span id="time_<%= posts[i]._id %>"></span> • <span id="like_count"
+                                    class="tooltip" data-title="This was the count at page load."
+                                    data-placement="right"><%= posts[i].likes.length %> likes</span>
+                                <script>
+                                    convertToDate(document.getElementById('time_<%= posts[i]._id %>'),
+                                        '<%= posts[i].creationDate %>')
+                                    setInterval(
+                                        "convertToDate(document.getElementById('time_<%= posts[i]._id %>'), '<%= posts[i].creationDate %>')",
+                                        10000)
+                                </script>
+                            </span>
+                        </div>
+                        <div class="font-bold text-lg">
+                            <pre class="max-h-96 min-h-44 overflow-scroll text-gray-200 font-sans scroll-blur mt-3">
+<%= posts[i].body %>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+
+            </div>
+            <div class="xs:hidden col-span-4 sm:col-span-4 md:col-span-3" id="left_bar"></div>
+            <div class="col-span-12 sm:col-span-8 md:col-span-9">
+                <span
+                    class="mx-auto text-xl font-black leading-none text-gray-100 select-none mx-auto px-auto mt-12 mb-2 pt-3 pb-1"
+                    id="bottomWarning"></span>
+            </div>
+        </div>
+    </div>
+</div>

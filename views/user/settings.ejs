@@ -1,0 +1,72 @@
+<!-- component -->
+<div class="bg-gray-800 min-h-screen pt-6">
+    <div class="container mx-auto">
+        <div class="inputs w-full max-w-2xl p-6 mx-auto">
+            <h2 class="text-2xl text-gray-200">Account Settings</h2>
+            <form class="mt-6 border-t border-gray-400 pt-4" action="/settings" method="POST">
+                <div class='flex flex-wrap -mx-3 mb-6'>
+                    <div class='w-full md:w-full px-3 mb-6'>
+                        <label class='block tracking-wide text-gray-100 text-xs font-bold mb-2' for='grid-text-1'>Email
+                            Address</label>
+                        <input class='appearance-none block w-full bg-gray-700 text-gray-100 border border-gray-600
+                            shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none focus:border-gray-500
+                            placeholder-gray-500' id='grid-text-1' type='text' placeholder='Email' required
+                            value="<%= user.email %>">
+                    </div>
+                    <div class="flex items-center justify-between mt-4">
+                        <div class='w-full md:w-1/2 px-3 mb-6'>
+                            <label class='block tracking-wide text-gray-100 text-xs font-bold mb-2'>Profile
+                                Picture</label>
+                            <label class='block tracking-wide text-gray-100 text-xs font-bold mb-2 text-justify'>To
+                                change
+                                your profile picture, <a class="text-gray-200 underline"
+                                    href="https://github.com/settings/profile" target="_blank">change it on
+                                    GitHub</a> first. Then wait a couple minutes for
+                                it to
+                                change on here.</label>
+                            <img src="https://avatars4.githubusercontent.com/u/<%= user.githubId %>" class="
+                        rounded-full w-24">
+                        </div>
+                        <div class='w-full md:w-1/2 px-3 mb-6'>
+                            <label class='block tracking-wide text-gray-100 text-xs font-bold mb-2'>GitHub User
+                                ID</label>
+                            <input class='appearance-none block w-full bg-gray-700 text-gray-100 border border-gray-600
+                                shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none focus:border-gray-500
+                                placeholder-gray-500' type='text' disabled value='<%= user.githubId %>'>
+                        </div>
+                    </div>
+                    <h2 class="text-2xl text-gray-300">Personal Settings</h2>
+                    <div class="personal w-full border-t border-gray-400 mt-6">
+                        <div class='w-full md:w-full px-3 mb-6  mt-4'>
+                            <label class='block tracking-wide text-gray-100 text-xs font-bold mb-2'>Username</label>
+                            <input class='appearance-none block w-full bg-gray-700 text-gray-100 border border-gray-600
+                                shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none focus:border-gray-500
+                                placeholder-gray-500' type='text' required value="<%= user.username %>"
+                                placeholder="Username">
+                        </div>
+                        <div class='w-full md:w-full px-3 mb-6  mt-4'>
+                            <label class='block tracking-wide text-gray-100 text-xs font-bold mb-2'>Website</label>
+                            <input class='appearance-none block w-full bg-gray-700 text-gray-100 border border-gray-600
+                                shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none focus:border-gray-500
+                                placeholder-gray-500' type='text' required value="<%= user.website %>"
+                                placeholder="Website">
+                        </div>
+                        <div class='w-full md:w-full px-3 mb-6'>
+                            <label class='block tracking-wide text-gray-100 text-xs font-bold mb-2'>Bio</label>
+                            <textarea class='bg-gray-100 rounded-md border leading-normal resize-none w-full h-20 py-2 px-3
+                                shadow-inner font-medium placeholder-gray-100 focus:outline-none
+                                bg-gray-700 text-gray-100 border border-gray-600 placeholder-gray-500' required
+                                placeholder="Bio"><%= user.bio %></textarea>
+                        </div>
+                        <div class="flex justify-end">
+                            <a class="px-4 bg-red-400 p-3 rounded-lg text-black hover:bg-red-500
+                                hover:text-gray-900 mr-2 cursor-pointer" href="/account">Cancel</a>
+                            <button type="submit" class="px-4 bg-indigo-500 p-3 rounded-lg text-white
+                    hover:bg-indigo-400">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

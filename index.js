@@ -32,6 +32,8 @@ app.set('view engine', 'ejs');
 if (process.env.ENV == "p" || process.env.ENV == "production") {
     const main = require('./routes/main')
     app.use('/', main);
+    const internalApi = require('./routes/api/internal')
+    app.use('/api', internalApi);
     const user = require('./routes/user')
     app.use('/', user);
 } else {

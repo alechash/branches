@@ -1,54 +1,47 @@
 const mongoose = require('mongoose');
 
-const User = new mongoose.Schema({
+const Log = new mongoose.Schema({
 
     /** strings */
-    username: {
+    owner: {
         type: String,
-        unique: true,
+        unique: false,
         required: true
     },
-    email: {
+    body: {
         type: String,
-        unique: true,
+        unique: false,
         required: true
     },
-    bio: {
+    reportReason: {
         type: String,
+        unique: false,
+        required: false
+    },
+
+    /** numbers */
+    ownersGithubId: {
+        type: Number,
         unique: false,
         required: true
     },
 
-    /** social accounts */
-    github: {
-        type: String,
+    /** arrays */
+    likes: {
+        type: Array,
         unique: false,
-        required: true
-    },
-    githubId: {
-        type: String,
-        unique: true,
-        required: true
-    },
-    twitter: {
-        type: String,
-        unique: false,
-        required: false
-    },
-    website: {
-        type: String,
-        unique: false,
-        required: false
+        required: true,
+        default: []
     },
 
     /** booleans */
-    moderator: {
+    media: {
         type: Boolean,
         unique: false,
         required: true,
         default: false
     },
-    banned: {
+    reported: {
         type: Boolean,
         unique: false,
         required: true,
@@ -64,10 +57,9 @@ const User = new mongoose.Schema({
     },
 });
 
-User.index({
-    username: 'text',
-    displayname: 'text',
-    description: 'text'
+Log.index({
+    owner: 'text',
+    body: 'text'
 });
 
-module.exports = mongoose.model('User', User)
+module.exports = mongoose.model('Log', Log)

@@ -1,7 +1,8 @@
-<nav class="flex flex-wrap items-center p-5 bg-gray-900 z-50 fixed right-0 left-0">
+<nav class="flex flex-wrap items-center p-5 bg-gray-900 z-40 fixed right-0 left-0">
     <a href="/" class="flex items-center font-medium text-gray-90 w-auto items-center justify-center">
-        <span class="mx-auto text-xl font-black leading-none text-gray-100 select-none mx-auto px-auto">branches<span
-                class="text-blue-600">.</span></span>
+        <img src="/icons/branches.svg" class="w-8  pb-1"><span
+            class="mx-auto text-xl font-black leading-none text-gray-100 select-none mx-auto px-auto"> branches<span
+                class="text-blue-600" id="period">.</span></span>
     </a>
     <div class="flex md:hidden ml-auto">
         <button id="hamburger">
@@ -14,9 +15,9 @@
         </button>
     </div>
     <div class="toggle hidden md:flex w-full md:w-auto text-right text-bold mt-5 md:mt-0">
-        <a href="#" class="block inline-block text-gray-300 hover:text-gray-400 px-3 py-3 float-left">Account</a>
-        <a href="#" class="block inline-block text-gray-300 hover:text-gray-400 px-3 py-3 float-left">Latest</a>
-        <a href="#" class="block inline-block text-gray-300 hover:text-gray-400 px-3 py-3 float-left">Explore</a>
+        <a href="/home" class="block inline-block text-gray-300 hover:text-gray-400 px-3 py-3 float-left">Home</a>
+        <a href="/latest" class="block inline-block text-gray-300 hover:text-gray-400 px-3 py-3 float-left">Latest</a>
+        <a href="/explore" class="block inline-block text-gray-300 hover:text-gray-400 px-3 py-3 float-left">Explore</a>
         <% if(loggedin == true) { %>
         <span class="dropdown mr-0 ml-auto md:fixed md:right-5">
             <button class="inline-flex items-center justify-center px-2 py-2 text-base font-medium leading-6 text-white
@@ -52,7 +53,7 @@
         Signup With <span> <i class="pl-2 lni lni-github-original"></i></span>
     </a>
     <% } else { %>
-    <button class="inline-flex items-center justify-center px-2 py-2 text-base font-medium leading-6 text-white
+    <button class="modal-open inline-flex items-center justify-center px-2 py-2 text-base font-medium leading-6 text-white
             whitespace-no-wrap transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md
             hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo
             active:bg-indigo-700 toggle hidden md:flex w-full md:w-auto px-4 py-2 text-right bg-blue-900

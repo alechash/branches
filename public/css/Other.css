@@ -13,3 +13,30 @@
 .zindex-50 * {
     z-index: 50 !important;
 }
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.xs\:visible {
+    display: block;
+}
+
+@media (max-width: 640px) {
+    .xs\:hidden {
+        display: none;
+    }
+}
+
+@media (min-width: 640px) {
+    .xs\:visible {
+        display: none;
+    }
+}
+
+.scroll-blur {}

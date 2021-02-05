@@ -1,4 +1,5 @@
 <script src="/js/postsHelper.js"></script>
+<script src="/js/jailed.js"></script>
 <script>
     var userid = '<%= userid %>'
 </script>
@@ -65,7 +66,7 @@
             <div class="col-span-12 sm:col-span-8 md:col-span-9" id="postsContainer">
                 <% for(var i=0; i < posts.length; i++) {%>
                 <div class="flex flex-row bg-white shadow-sm rounded p-4 bg-gray-900 mb-3">
-                    <div class="max-w-15 min-h-44 max-h-96 overflow-scroll no-scrollbar">
+                    <div class="w-15 min-h-44 max-h-96 overflow-scroll no-scrollbar">
                         <img class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-black mb-2"
                             src="https://avatars4.githubusercontent.com/u/55750096?v4" id="profile_picture"
                             title="Profile Picture">
@@ -108,7 +109,7 @@
                         <span title="Report Post" class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-yellow-100
                             text-yellow-500 mb-2" id="like_button"><i class="lni lni-flag"></i></span>
                     </div>
-                    <div class="flex flex-col flex-grow ml-4">
+                    <div class="flex flex-col ml-4" style="max-width: 75%;">
                         <div class="text-sm text-gray-500"><a href="/u/mr-winson"
                                 class="text-gray-400 hover:text-gray-600"><span class="font-bold"
                                     id="at_symbol">@</span><span class="font-bold" id="username">mr-winson</span></a>
@@ -125,7 +126,8 @@
                             </span>
                         </div>
                         <div class="font-bold text-lg">
-                            <pre class="max-h-96 min-h-44 overflow-scroll text-gray-200 font-sans scroll-blur mt-3">
+                            <pre
+                                class="max-h-96 min-h-44 overflow-scroll text-gray-200 font-sans scroll-blur mt-3 post-text">
 <%= posts[i].body %>
                             </pre>
                         </div>

@@ -66,6 +66,41 @@ router.get('/', async function (req, res, next) {
     return res.render('base', about);
 })
 
+// GET, user account page
+router.get('/u/:username', async function (req, res, next) {
+    if (!req.query.p || req.query.p <= 0) {
+        req.query.p = 1
+    }
+
+    var userExists = await User.exists({
+        username: req.params.username
+    })
+
+    if (userExists == false) {
+        return next()
+    }
+
+    var user = await User.findOne({
+        username: req.params.username
+    })
+
+    const skip = Number((req.query.p - 1) * 20)
+
+    about.posts = await Log.find({
+        owner: user._id
+    }).skip(skip).limit(20).sort({
+        creationDate: -1
+    })
+
+    about.title = 'Welcome to Branches - ' + Name
+    about.template = 'main/user'
+    about.navbar = true
+    about.footer = true
+    about.userid = user._id
+
+    return res.render('base', about);
+})
+
 // GET, main page
 router.get('/home', async function (req, res, next) {
     if (await funcs.loggedIn(req.user) == false) {
@@ -97,6 +132,7 @@ router.get('/latest', async function (req, res, next) {
     about.posts = await Log.find().skip(skip).limit(20).sort({
         creationDate: -1
     })
+
     about.title = 'Branches Home - ' + Name
     about.template = 'main/latest'
     about.navbar = true

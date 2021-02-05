@@ -37,6 +37,14 @@ router.get('/latest/load/morePosts', async function (req, res, next) {
         }).sort({
             creationDate: -1
         })
+    } else if (req.query.context == 'user') {
+        logs = await Log.find({
+            owner: req.query.userid
+        }).skip(skip).limit(20).sort({
+            likes: -1
+        }).sort({
+            creationDate: -1
+        })
     } else {
         logs = []
     }

@@ -20,7 +20,7 @@ async function loadMorePosts() {
         return
     }
 
-    const posts = await fetch('/api/latest/load/morePosts?skip=' + skip + '&context=' + postContext);
+    const posts = await fetch('/api/latest/load/morePosts?skip=' + skip + '&context=' + postContext + '&userid=' + userid);
     skip = skip + 1
 
     const json = await posts.json()
@@ -61,11 +61,11 @@ function convertToDate(element, previous) {
     } else if (elapsed < msPerDay) {
         element.innerText = Math.round(elapsed / msPerHour) + ' hours ago';
     } else if (elapsed < msPerMonth) {
-        element.innerText = 'approximately ' + Math.round(elapsed / msPerDay) + ' days ago';
+        element.innerText = 'about ' + Math.round(elapsed / msPerDay) + ' days ago';
     } else if (elapsed < msPerYear) {
-        element.innerText = 'approximately ' + Math.round(elapsed / msPerMonth) + ' months ago';
+        element.innerText = 'about ' + Math.round(elapsed / msPerMonth) + ' months ago';
     } else {
-        element.innerText = 'approximately ' + Math.round(elapsed / msPerYear) + ' years ago';
+        element.innerText = 'about ' + Math.round(elapsed / msPerYear) + ' years ago';
     }
 }
 
@@ -87,11 +87,11 @@ function returnConvertToDate(previous) {
     } else if (elapsed < msPerDay) {
         return Math.round(elapsed / msPerHour) + ' hours ago';
     } else if (elapsed < msPerMonth) {
-        return 'approximately ' + Math.round(elapsed / msPerDay) + ' days ago';
+        return 'about ' + Math.round(elapsed / msPerDay) + ' days ago';
     } else if (elapsed < msPerYear) {
-        return 'approximately ' + Math.round(elapsed / msPerMonth) + ' months ago';
+        return 'about ' + Math.round(elapsed / msPerMonth) + ' months ago';
     } else {
-        return 'approximately ' + Math.round(elapsed / msPerYear) + ' years ago';
+        return 'about ' + Math.round(elapsed / msPerYear) + ' years ago';
     }
 }
 
@@ -200,7 +200,7 @@ async function loadTrending() {
         ${i + 1}
     </div>
     <div class="flex flex-col flex-grow ml-4">
-        <div class="text-sm text-gray-200 my-auto break-all">${he.encode(json[i].body)}</div>
+        <div class="text-sm text-gray-200 my-auto break-all overflow-scroll">${he.encode(json[i].body)}</div>
     </div>
 </div>
 `
@@ -224,7 +224,7 @@ async function loadLatest() {
         ${i + 1}
     </div>
     <div class="flex flex-col flex-grow ml-4">
-        <div class="text-sm text-gray-200 my-auto break-all">${he.encode(json[i].body)}</div>
+        <div class="text-sm text-gray-200 my-auto break-all overflow-scroll">${he.encode(json[i].body)}</div>
     </div>
 </div>
 `
